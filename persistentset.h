@@ -86,4 +86,7 @@ struct persistent_set::iterator {
 	iterator operator--(int);
 };
 
+bool operator==(persistent_set::iterator, persistent_set::iterator);
+bool operator!=(persistent_set::iterator, persistent_set::iterator);
+
 #endif /* PERSISTENTSET_H_ */

@@ -4,7 +4,9 @@
 
 #include <cstdio>
 
-std::shared_ptr<const persistent_set::node> persistent_set::endnode = std::make_shared<const persistent_set::node>(value_type(), nullptr, nullptr);
+std::shared_ptr<const persistent_set::node> persistent_set::endnode =
+		std::make_shared<const persistent_set::node>(value_type(), nullptr,
+				nullptr);
 
 persistent_set::persistent_set() {
 	root = std::make_shared<root_node>(nullptr);
@@ -270,4 +272,19 @@ void persistent_set::node::print_tree() const {
 	fprintf(stderr, "value %d, addr %p, left addr %p, right addr %p\n",
 			this->data, this, this->left.get(), this->right.get());
 	this->right->print_tree();
+}
+
+bool operator==(persistent_set::iterator rhs,
+		persistent_set::iterator lhs) {
+	if (lhs.root.expired() || lhs.data.expired() || rhs.root.expired()
+			|| rhs.data.expired()) {
+		return false;
+	}
+	return !(lhs.root.owner_before(rhs.root) || rhs.root.owner_before(lhs.root)
+			|| lhs.data.owner_before(rhs.data)
+			|| rhs.data.owner_before(lhs.data));
+}
+bool operator!=(persistent_set::iterator rhs,
+		persistent_set::iterator lhs) {
+	return !(lhs == rhs);
 }
