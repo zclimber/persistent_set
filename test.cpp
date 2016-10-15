@@ -1,6 +1,9 @@
-#include <bits/stdc++.h>
+#include <cassert>
+#include <iostream>
+#include <random>
+#include <set>
 
-#include <persistentset.h>
+#include "persistentset.h"
 
 using namespace std;
 
@@ -32,7 +35,7 @@ int main() {
 		ss.insert(cr);
 		pss.insert(cr);
 		auto cp = ss;
-		for(auto it = ps.begin(); it != ps.end(); it++){
+		for(auto it = pss.begin(); it != pss.end(); it++){
 			assert(cp.count(*it) == 1);
 			cp.erase(*it);
 		}
