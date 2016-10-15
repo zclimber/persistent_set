@@ -54,12 +54,14 @@ int main() {
 			assert(cp.count(*it) == 1);
 			cp.erase(*it);
 		}
+		assert(cp.size() == 0);
 	}
 	for (int i = 0; i < (int) vset.size(); i++) {
 		for (auto it = vpset[i].begin(); it != vpset[i].end(); it++) {
 			assert(vset[i].count(*it) == 1);
 			vset[i].erase(*it);
 		}
+		assert(vset[i].size() == 0);
 	}
 	cerr << "OK\n";
 }
